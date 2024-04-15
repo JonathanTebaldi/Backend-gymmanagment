@@ -1,8 +1,20 @@
 package br.edu.fema.tccacademia.models.caixa;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+import java.util.Date;
+import java.util.UUID;
+
+@Entity(name = "Caixa")
+@Table(name = "caixas")
+@Getter
+@EqualsAndHashCode(of = "id")
 public class Caixa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
     private Double saldoAtual;
     private Double valorInicial;
     private Double valorFinal;
