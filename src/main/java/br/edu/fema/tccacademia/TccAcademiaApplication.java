@@ -1,6 +1,5 @@
 package br.edu.fema.tccacademia;
 
-import br.edu.fema.tccacademia.models.pessoa.Pessoa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

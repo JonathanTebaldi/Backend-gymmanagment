@@ -17,6 +17,13 @@ public class Matricula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    @ManyToOne
     private Plano plano;
+    @OneToOne
     private Aluno aluno;
+
+    public Matricula(DadosCadastroMatricula dados){
+        this.plano = dados.plano();
+        this.aluno = dados.aluno();
+    }
 }

@@ -1,7 +1,6 @@
 package br.edu.fema.tccacademia.models.treino;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +15,23 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Treino {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    private String nomeExercicio;
     private String descricao;
+    private String series;
+    private String musculo;
+
+    public Treino(DadosCadastroTreino dados){
+        this.nomeExercicio = dados.nomeExercicio();
+        this.descricao = dados.descricao();
+        this.series = dados.series();
+        this.musculo = dados.musculo();
+    }
+
+    public void adicionar(){
+
+    }
 
 }

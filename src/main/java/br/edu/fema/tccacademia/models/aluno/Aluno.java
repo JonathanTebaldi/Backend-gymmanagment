@@ -1,6 +1,8 @@
 package br.edu.fema.tccacademia.models.aluno;
 
 import br.edu.fema.tccacademia.enums.SexoEnum;
+import br.edu.fema.tccacademia.models.endereco.Endereco;
+import br.edu.fema.tccacademia.models.matricula.Matricula;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +25,30 @@ public class Aluno{
     private String CPF;
     private LocalDateTime dataNascimento;
     private String rg;
-    private String endereco;
-    private String bairro;
+    @Embedded
+    private Endereco endereco;
+    private Boolean ativo;
+    @OneToOne
+    private Matricula matricula;
+
+    public Aluno(DadosCadastroAluno dados) {
+        this.nome = dados.nome();
+        this.sexo = dados.sexo();
+        this.celular = dados.celular();
+        this.CPF = CPF;
+        this.dataNascimento = dados.dataNascimento();
+        this.rg = dados.rg();
+        this.endereco = dados.endereco();
+        this.ativo = true;
+    }
+
+    public void inativar(){
+        this.ativo = false;
+    }
+
+    public void excluir(){
+
+    }
+
+
 }

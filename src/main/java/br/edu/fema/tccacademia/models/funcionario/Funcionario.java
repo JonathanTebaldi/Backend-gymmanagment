@@ -18,6 +18,14 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String senha;
-    private double salario;
     private String cargo;
+
+    public Funcionario(DadosCadastroFuncionario dados){
+        this.senha = dados.senha();
+        this.cargo = dados.cargo();
+    }
+
+    public void excluir(){
+
+    }
 }

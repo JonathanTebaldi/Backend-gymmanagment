@@ -22,6 +22,12 @@ public class Modalidade {
     private LocalDateTime diasDaSemana;
     private Funcionario funcionario;
 
+    public Modalidade(DadosCadastroModalidade dados){
+        this.descricao = dados.descricao();
+        this.diasDaSemana = dados.diasDaSemana();
+        this.funcionario = dados.funcionario();
+    }
+
     public void adicionarProfessor(Funcionario funcionario){
         
     }

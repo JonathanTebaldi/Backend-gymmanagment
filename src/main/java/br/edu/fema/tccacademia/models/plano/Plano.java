@@ -1,5 +1,6 @@
 package br.edu.fema.tccacademia.models.plano;
 
+import br.edu.fema.tccacademia.models.matricula.Matricula;
 import br.edu.fema.tccacademia.models.modalidade.Modalidade;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +19,15 @@ public class Plano {
     private UUID id;
     private String descricao;
     private Double preco;
+    @OneToMany
     private List<Modalidade> modalidades;
+    @OneToMany
+    private Matricula matricula;
 
+    public Plano(DadosCadastroPlano dados) {
+        this.descricao = dados.descricao();
+        this.preco = dados.preco();
+        this.modalidades = dados.modalidades();
 
+    }
 }
