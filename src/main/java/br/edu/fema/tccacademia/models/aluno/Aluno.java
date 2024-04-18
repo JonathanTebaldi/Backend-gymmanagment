@@ -22,7 +22,7 @@ public class Aluno{
     @Enumerated(EnumType.STRING)
     private SexoEnum sexo;
     private String celular;
-    private String CPF;
+    private String cpf;
     private LocalDateTime dataNascimento;
     private String rg;
     @Embedded
@@ -35,12 +35,37 @@ public class Aluno{
         this.nome = dados.nome();
         this.sexo = dados.sexo();
         this.celular = dados.celular();
-        this.CPF = CPF;
+        this.cpf = dados.cpf();
         this.dataNascimento = dados.dataNascimento();
         this.rg = dados.rg();
         this.endereco = dados.endereco();
         this.ativo = true;
     }
+
+    public void atualizarInformacoes(DadosAtualizacaoAluno dados){
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if(dados.nome() != null) {
+            this.sexo = dados.sexo();
+        }
+        if(dados.nome() != null) {
+            this.celular = dados.celular();
+        }
+        if(dados.nome() != null) {
+            this.cpf = dados.cpf();
+        }
+        if(dados.nome() != null) {
+            this.dataNascimento = dados.dataNascimento();
+        }
+        if(dados.nome() != null) {
+            this.rg = dados.rg();
+        }
+        if(dados.nome() != null) {
+            this.endereco = dados.endereco();
+        }
+    }
+
 
     public void inativar(){
         this.ativo = false;

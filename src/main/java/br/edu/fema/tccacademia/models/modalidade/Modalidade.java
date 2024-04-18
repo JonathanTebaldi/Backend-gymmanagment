@@ -18,17 +18,17 @@ public class Modalidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    private String nome;
     private String descricao;
     private LocalDateTime diasDaSemana;
     private Funcionario funcionario;
 
     public Modalidade(DadosCadastroModalidade dados){
+        this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.diasDaSemana = dados.diasDaSemana();
         this.funcionario = dados.funcionario();
     }
 
-    public void adicionarProfessor(Funcionario funcionario){
-        
-    }
+
 }

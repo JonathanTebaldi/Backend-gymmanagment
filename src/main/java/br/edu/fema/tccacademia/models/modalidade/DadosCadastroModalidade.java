@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 public record DadosCadastroModalidade(
         @NotBlank
+        String nome,
+        @NotBlank
         String descricao,
         @NotNull
         LocalDateTime diasDaSemana,

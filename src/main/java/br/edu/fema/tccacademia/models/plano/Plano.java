@@ -28,6 +28,17 @@ public class Plano {
         this.descricao = dados.descricao();
         this.preco = dados.preco();
         this.modalidades = dados.modalidades();
+    }
 
+    public void atualizarInformacoes(DadosAtualizacaoPlano dados){
+        if(dados.descricao() != null){
+            this.descricao = dados.descricao();
+        }
+        if(dados.preco() != null){
+            this.preco = dados.preco();
+        }
+        if(dados.modalidades() != null){
+            this.modalidades = dados.modalidades();
+        }
     }
 }
