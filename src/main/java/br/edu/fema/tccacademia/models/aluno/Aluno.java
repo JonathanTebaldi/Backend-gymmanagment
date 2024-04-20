@@ -46,23 +46,23 @@ public class Aluno{
         if(dados.nome() != null){
             this.nome = dados.nome();
         }
-        if(dados.nome() != null) {
+        if(dados.sexo() != null) {
             this.sexo = dados.sexo();
         }
-        if(dados.nome() != null) {
+        if(dados.celular() != null) {
             this.celular = dados.celular();
         }
-        if(dados.nome() != null) {
+        if(dados.cpf() != null) {
             this.cpf = dados.cpf();
         }
-        if(dados.nome() != null) {
+        if(dados.dataNascimento() != null) {
             this.dataNascimento = dados.dataNascimento();
         }
-        if(dados.nome() != null) {
+        if(dados.rg() != null) {
             this.rg = dados.rg();
         }
-        if(dados.nome() != null) {
-            this.endereco = dados.endereco();
+        if(dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
         }
     }
 

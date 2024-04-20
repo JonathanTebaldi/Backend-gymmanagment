@@ -10,9 +10,4 @@ public class TccAcademiaApplication {
 		SpringApplication.run(TccAcademiaApplication.class, args);
 	}
 
-
-	public void run(String... args) throws Exception {
-		Pessoa pessoa = new Pessoa();
-
 	}
-}

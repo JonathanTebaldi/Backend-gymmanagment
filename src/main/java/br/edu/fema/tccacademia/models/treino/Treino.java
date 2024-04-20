@@ -30,8 +30,19 @@ public class Treino {
         this.musculo = dados.musculo();
     }
 
-    public void adicionar(){
-
+    public void atualizarInformacoes(DadosAtualizacaoTreino dados){
+        if(dados.nomeExercicio() != null){
+            this.nomeExercicio = dados.nomeExercicio();
+        }
+        if(dados.descricao() != null){
+            this.descricao = dados.musculo();
+        }
+        if(dados.series() != null){
+            this.series = dados.series();
+        }
+        if(dados.musculo() != null){
+            this.musculo = dados.musculo();
+        }
     }
 
 }
