@@ -7,6 +7,8 @@ import java.util.List;
 
 public record DadosCadastroPlano(
         @NotBlank
+        String nome,
+        @NotBlank
         String descricao,
         Double preco,
         List<Modalidade>  modalidades

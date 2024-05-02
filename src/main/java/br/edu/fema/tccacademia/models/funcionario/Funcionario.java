@@ -25,7 +25,14 @@ public class Funcionario {
         this.cargo = dados.cargo();
     }
 
-    public void excluir(){
+    public void atualizarInformacoes(DadosAtualizacaoFuncionario dados){
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+            this.senha = dados.senha();
+            this.cargo = dados.cargo();
+        }
+    }
 
+    public void excluir(){
     }
 }

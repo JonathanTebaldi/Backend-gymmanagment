@@ -17,6 +17,7 @@ public class Plano {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    private String nome;
     private String descricao;
     private Double preco;
     @OneToMany
@@ -25,12 +26,16 @@ public class Plano {
     private Matricula matricula;
 
     public Plano(DadosCadastroPlano dados) {
+        this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.preco = dados.preco();
         this.modalidades = dados.modalidades();
     }
 
     public void atualizarInformacoes(DadosAtualizacaoPlano dados){
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+        }
         if(dados.descricao() != null){
             this.descricao = dados.descricao();
         }
@@ -40,5 +45,8 @@ public class Plano {
         if(dados.modalidades() != null){
             this.modalidades = dados.modalidades();
         }
+    }
+
+    public void excluir() {
     }
 }

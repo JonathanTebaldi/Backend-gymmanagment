@@ -1,14 +1,14 @@
 package br.edu.fema.tccacademia.models.funcionario;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroFuncionario(
+import java.util.UUID;
+
+public record DadosAtualizacaoFuncionario(
         @NotBlank
+        UUID id,
         String nome,
-        @NotBlank
         String senha,
-        @NotBlank
         String cargo
 ) {
 }
