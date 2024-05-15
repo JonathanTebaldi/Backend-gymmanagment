@@ -10,7 +10,9 @@ public record DadosCadastroPlano(
         String nome,
         @NotBlank
         String descricao,
+        @NotBlank
         Double preco,
+        @NotBlank
         List<Modalidade>  modalidades
 ) {
 }

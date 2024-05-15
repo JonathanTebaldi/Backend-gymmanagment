@@ -28,8 +28,8 @@ public class Aluno{
     @Embedded
     private Endereco endereco;
     private Boolean ativo;
-    @OneToOne
-    private Matricula matricula;
+    //@OneToOne
+    //private Matricula matricula;
 
     public Aluno(DadosCadastroAluno dados) {
         this.nome = dados.nome();

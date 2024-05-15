@@ -21,6 +21,7 @@ public class Modalidade {
     private String nome;
     private String descricao;
     private LocalDateTime diasDaSemana;
+    @ManyToMany
     private Funcionario funcionario;
 
     public Modalidade(DadosCadastroModalidade dados){
@@ -31,4 +32,21 @@ public class Modalidade {
     }
 
 
+    public void atualizarInformacoes(DadosAtualizacaoModalidade dados) {
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.descricao() != null){
+            this.descricao = dados.descricao();
+        }
+        if (dados.diasDaSemana() != null){
+            this.diasDaSemana = dados.diasDaSemana();
+        }
+        if (dados.funcionario() != null){
+            this.funcionario = dados.funcionario();
+        }
+    }
+
+    public void excluir() {
+    }
 }

@@ -1,11 +1,11 @@
 package br.edu.fema.tccacademia.controller;
 
+import br.edu.fema.tccacademia.models.aluno.DadosDetalhamentoAluno;
 import br.edu.fema.tccacademia.models.aluno.Aluno;
 import br.edu.fema.tccacademia.models.aluno.DadosAtualizacaoAluno;
 import br.edu.fema.tccacademia.models.aluno.DadosCadastroAluno;
 import br.edu.fema.tccacademia.models.aluno.DadosListagemAluno;
 import br.edu.fema.tccacademia.repository.AlunoRepository;
-import jakarta.persistence.GeneratedValue;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
 
 
 @RestController
-@RequestMapping("pessoa")
+@RequestMapping("aluno")
 public class AlunoController {
 
     @Autowired
@@ -27,30 +28,43 @@ public class AlunoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroAluno dados){
-        repository.save(new Aluno(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroAluno dados, UriComponentsBuilder uriBuilder){
+        var aluno = new Aluno(dados);
+        repository.save(aluno);
+
+        var uri = uriBuilder.path("/alunos/{id}").buildAndExpand(aluno).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoAluno(aluno));
     }
 
     @GetMapping("/ativo")
-    public Page<DadosListagemAluno> listarAtivo(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
-        return repository.findByAtivoTrue(paginacao).map(DadosListagemAluno::new);
+    public ResponseEntity<Page<DadosListagemAluno>> listarAtivo(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
+        var page = repository.findByAtivoTrue(paginacao).map(DadosListagemAluno::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/desativado")
-    public Page<DadosListagemAluno> listarDesativo(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
-        return repository.findByAtivoFalse(paginacao).map(DadosListagemAluno::new);
+    public ResponseEntity<Page<DadosListagemAluno>> listarDesativo(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
+        var page = repository.findByAtivoFalse(paginacao).map(DadosListagemAluno::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping
-    public Page<DadosListagemAluno> listarTodos(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListagemAluno::new);
+    public ResponseEntity<Page<DadosListagemAluno>> listarTodos(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
+        var page = repository.findAll(paginacao).map(DadosListagemAluno::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoAluno dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoAluno dados){
         var aluno = repository.getReferenceById(dados.id());
         aluno.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoAluno(aluno));
     }
 
     @DeleteMapping("/{id}")

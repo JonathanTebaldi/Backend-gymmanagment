@@ -1,7 +1,6 @@
 package br.edu.fema.tccacademia.controller;
 
-import br.edu.fema.tccacademia.models.treino.DadosAtualizacaoTreino;
-import br.edu.fema.tccacademia.models.treino.DadosListagemTreino;
+import br.edu.fema.tccacademia.models.treino.*;
 import br.edu.fema.tccacademia.repository.TreinoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
 
@@ -23,14 +23,29 @@ public class TreinoController {
 
     @PostMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoTreino dados){
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTreino dados, UriComponentsBuilder uriBuilder){
+        var treino = new Treino(dados);
+        repository.save(treino);
+
+        var uri = uriBuilder.path("treinos/{id}").buildAndExpand(treino.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoTreino(treino));
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoTreino dados){
         var treino = repository.getReferenceById(dados.id());
         treino.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoTreino(treino));
     }
 
     @GetMapping
-    public Page<DadosListagemTreino> listar(@PageableDefault (page = 10, sort = {"nome"}) Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListagemTreino::new);
+    public ResponseEntity<Page<DadosListagemTreino>> listar(@PageableDefault (page = 10, sort = {"nome"}) Pageable paginacao) {
+        var page = repository.findAll(paginacao).map(DadosListagemTreino::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @DeleteMapping
