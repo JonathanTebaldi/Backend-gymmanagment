@@ -56,4 +56,10 @@ public class ModalidadeController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable UUID id){
+        var modalidade = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoModalidade(modalidade));
+    }
 }

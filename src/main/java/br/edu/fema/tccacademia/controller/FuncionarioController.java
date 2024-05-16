@@ -60,4 +60,10 @@ public class FuncionarioController {
 
         return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable UUID id){
+        var funcionario = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoFuncionario(funcionario));
+    }
 }

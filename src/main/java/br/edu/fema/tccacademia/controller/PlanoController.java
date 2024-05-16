@@ -56,4 +56,11 @@ public class PlanoController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable UUID id){
+        var plano = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoPlano(plano));
+    }
+
 }

@@ -2,7 +2,6 @@ package br.edu.fema.tccacademia.models.aluno;
 
 import br.edu.fema.tccacademia.enums.SexoEnum;
 import br.edu.fema.tccacademia.models.endereco.Endereco;
-import br.edu.fema.tccacademia.models.matricula.Matricula;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

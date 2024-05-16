@@ -48,11 +48,17 @@ public class TreinoController {
         return ResponseEntity.ok(page);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity inativar(@PathVariable UUID id){
         var treino = repository.getReferenceById(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable UUID id){
+        var treino = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoTreino(treino));
     }
 }
