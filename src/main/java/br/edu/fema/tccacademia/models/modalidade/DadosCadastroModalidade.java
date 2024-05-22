@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record DadosCadastroModalidade(
         @NotBlank
@@ -14,6 +15,6 @@ public record DadosCadastroModalidade(
         @NotNull
         LocalDateTime diasDaSemana,
         @NotNull
-        Funcionario funcionario
+        List<Funcionario> funcionario
 ) {
 }

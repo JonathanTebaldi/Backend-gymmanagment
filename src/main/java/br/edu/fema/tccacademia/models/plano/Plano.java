@@ -1,6 +1,5 @@
 package br.edu.fema.tccacademia.models.plano;
 
-import br.edu.fema.tccacademia.models.matricula.Matricula;
 import br.edu.fema.tccacademia.models.modalidade.Modalidade;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,17 +14,15 @@ import java.util.UUID;
 @Setter
 public class Plano {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nome;
     private String descricao;
     private Double preco;
     @OneToMany
     private List<Modalidade> modalidades;
-    @OneToMany
-    private Matricula matricula;
 
     public Plano(DadosCadastroPlano dados) {
+        this.id = UUID.randomUUID();
         this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.preco = dados.preco();

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "modalidades")
@@ -16,15 +17,15 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 public class Modalidade {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nome;
     private String descricao;
     private LocalDateTime diasDaSemana;
     @ManyToMany
-    private Funcionario funcionario;
+    private List<Funcionario> funcionario;
 
     public Modalidade(DadosCadastroModalidade dados){
+        this.id = UUID.randomUUID();
         this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.diasDaSemana = dados.diasDaSemana();

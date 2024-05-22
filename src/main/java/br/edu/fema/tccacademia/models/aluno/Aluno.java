@@ -3,7 +3,9 @@ package br.edu.fema.tccacademia.models.aluno;
 import br.edu.fema.tccacademia.enums.SexoEnum;
 import br.edu.fema.tccacademia.models.endereco.Endereco;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -13,9 +15,10 @@ import java.util.UUID;
 @Table(name = "alunos")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Aluno{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nome;
     @Enumerated(EnumType.STRING)
@@ -27,10 +30,9 @@ public class Aluno{
     @Embedded
     private Endereco endereco;
     private Boolean ativo;
-    //@OneToOne
-    //private Matricula matricula;
 
     public Aluno(DadosCadastroAluno dados) {
+        this.id = UUID.randomUUID();
         this.nome = dados.nome();
         this.sexo = dados.sexo();
         this.celular = dados.celular();

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public record DadosAtualizacaoModalidade(
@@ -13,6 +14,6 @@ public record DadosAtualizacaoModalidade(
         String nome,
         String descricao,
         LocalDateTime diasDaSemana,
-        Funcionario funcionario
+        List<Funcionario> funcionario
 ) {
 }

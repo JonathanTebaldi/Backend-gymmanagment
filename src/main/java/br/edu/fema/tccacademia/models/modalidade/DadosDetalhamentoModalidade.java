@@ -14,6 +14,6 @@ public record DadosDetalhamentoModalidade(
 ) {
     public DadosDetalhamentoModalidade(Modalidade modalidade) {
         this(modalidade.getId(), modalidade.getNome(), modalidade.getDescricao(),
-                modalidade.getDiasDaSemana(), modalidade.getFuncionario());
+                modalidade.getDiasDaSemana(), (Funcionario) modalidade.getFuncionario());
     }
 }

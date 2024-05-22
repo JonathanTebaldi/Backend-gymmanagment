@@ -32,7 +32,7 @@ public class TreinoController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoTreino(treino));
     }
 
-    @PostMapping
+    @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoTreino dados){
         var treino = repository.getReferenceById(dados.id());

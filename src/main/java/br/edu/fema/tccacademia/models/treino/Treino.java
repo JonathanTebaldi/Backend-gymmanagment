@@ -16,7 +16,6 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 public class Treino {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nomeExercicio;
     private String descricao;
@@ -24,6 +23,7 @@ public class Treino {
     private String musculo;
 
     public Treino(DadosCadastroTreino dados){
+        this.id = UUID.randomUUID();
         this.nomeExercicio = dados.nomeExercicio();
         this.descricao = dados.descricao();
         this.series = dados.series();
