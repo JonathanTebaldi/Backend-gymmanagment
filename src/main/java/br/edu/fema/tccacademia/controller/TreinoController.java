@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("treinos")
+@RequestMapping("treino")
 public class TreinoController {
 
     @Autowired

@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("modalidades")
+@RequestMapping("modalidade")
 public class ModalidadeController {
 
     @Autowired

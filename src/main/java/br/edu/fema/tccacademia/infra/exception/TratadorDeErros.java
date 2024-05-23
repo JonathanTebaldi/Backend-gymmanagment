@@ -1,4 +1,4 @@
-package br.edu.fema.tccacademia.infra;
+package br.edu.fema.tccacademia.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
