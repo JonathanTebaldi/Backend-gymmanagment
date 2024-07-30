@@ -1,6 +1,8 @@
 package br.edu.fema.tccacademia.controller;
 
+import br.edu.fema.tccacademia.infra.security.TokenService;
 import br.edu.fema.tccacademia.models.usuario.DadosAutenticacao;
+import br.edu.fema.tccacademia.models.usuario.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 public class AutenticacaoController {
 
     @Autowired
     private AuthenticationManager manager;
 
-    @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var autentication = manager.authenticate(token);
+    @Autowired
+    private TokenService tokenService;
 
-        return ResponseEntity.ok().build();
+    @PostMapping("/login")
+    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var autentication = manager.authenticate(token);
+        var tokenJWT = tokenService.gerarToken((Usuario) autentication.getPrincipal());
+        return ResponseEntity.ok(tokenJWT);
     }
 }
