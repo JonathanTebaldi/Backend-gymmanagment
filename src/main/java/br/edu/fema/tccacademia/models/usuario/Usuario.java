@@ -26,6 +26,7 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
+
     public Usuario(String login, String senha) {
         this.id = UUID.randomUUID();
         this.login = login;

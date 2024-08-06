@@ -54,7 +54,6 @@ public class AlunoController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemAluno>> listarTodos(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
         var page = repository.findAll(paginacao).map(DadosListagemAluno::new);
-
         return ResponseEntity.ok(page);
     }
 

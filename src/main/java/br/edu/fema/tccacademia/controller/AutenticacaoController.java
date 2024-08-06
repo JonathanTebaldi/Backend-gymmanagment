@@ -1,5 +1,6 @@
 package br.edu.fema.tccacademia.controller;
 
+import br.edu.fema.tccacademia.infra.security.DadosTokenJWT;
 import br.edu.fema.tccacademia.infra.security.TokenService;
 import br.edu.fema.tccacademia.models.usuario.DadosAutenticacao;
 import br.edu.fema.tccacademia.models.usuario.Usuario;
@@ -28,6 +29,6 @@ public class AutenticacaoController {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var autentication = manager.authenticate(token);
         var tokenJWT = tokenService.gerarToken((Usuario) autentication.getPrincipal());
-        return ResponseEntity.ok(tokenJWT);
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 }

@@ -1,14 +1,11 @@
 package br.edu.fema.tccacademia.infra.security;
 
-import br.edu.fema.tccacademia.models.usuario.Usuario;
 import br.edu.fema.tccacademia.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,13 +25,13 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String tokenJWT = recuperarToken(request);
+        var tokenJWT = recuperarToken(request);
 
         if (tokenJWT != null) {
             String subject = tokenService.getSubject(tokenJWT);
             UserDetails usuario = repository.findByLogin(subject);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(usuario, null, null);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
@@ -42,12 +39,10 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
     }
 
     private String recuperarToken(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null) {
+        var authorizationHeader = request.getHeader("Authorization");
+        if(authorizationHeader != null){
             return authorizationHeader.replace("Bearer ", "");
         }
-
         return null;
     }
-
 }
