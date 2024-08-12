@@ -19,11 +19,12 @@ public class CaixaService {
     private PagamentoRepository pagamentoRepository;
 
 
-    public void abrirCaixa(Double valorInicial){
+    public Caixa abrirCaixa(Double valorInicial){
         Caixa caixa = new Caixa();
         caixa.setValorInicial(valorInicial);
         caixa.setValorFinal(valorInicial);
         caixa.setData(LocalDate.now());
+        return caixaRepository.save(caixa);
     }
 
     public void suprirCaixa(UUID id, Double valor){
