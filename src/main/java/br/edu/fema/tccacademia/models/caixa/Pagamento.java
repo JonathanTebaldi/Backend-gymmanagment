@@ -14,13 +14,22 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pagamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private Double valor;
     private String descricao;
-    @Temporal(TemporalType.TIME)
-    private LocalDate Date;
+    @Temporal(TemporalType.DATE)
+    private LocalDate date;
 
     @ManyToOne
     private Caixa caixa;
+
+    public Pagamento(Double valor, String descricao){
+        this.valor = valor;
+        this.descricao = descricao;
+        this.date = LocalDate.now();
+    }
 
 }

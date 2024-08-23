@@ -9,5 +9,4 @@ public class TccAcademiaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TccAcademiaApplication.class, args);
 	}
-
 	}

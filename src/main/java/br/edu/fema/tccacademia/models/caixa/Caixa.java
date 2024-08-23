@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "Caixa")
@@ -20,10 +21,13 @@ public class Caixa {
     private Double saldoAtual;
     private Double valorInicial;
     private Double valorFinal;
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private LocalDate data;
 
-    public Caixa(Double saldoAtual, Double valorInicial, Double valorFinal, Date data) {
+    @OneToMany
+    private List<Pagamento> pagamento;
+
+    public Caixa(Double saldoAtual, Double valorInicial, Double valorFinal) {
         this.id = UUID.randomUUID();
         this.saldoAtual = saldoAtual;
         this.valorInicial = valorInicial;
