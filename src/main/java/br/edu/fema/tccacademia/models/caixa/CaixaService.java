@@ -5,7 +5,7 @@ import br.edu.fema.tccacademia.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +14,6 @@ public class CaixaService {
 
     @Autowired
     private CaixaRepository caixaRepository;
-
     @Autowired
     private PagamentoRepository pagamentoRepository;
 
@@ -23,7 +22,7 @@ public class CaixaService {
         Caixa caixa = new Caixa();
         caixa.setValorInicial(valorInicial);
         caixa.setValorFinal(valorInicial);
-        caixa.setData(LocalDate.now());
+        caixa.setData(LocalDateTime.now());
         return caixaRepository.save(caixa);
     }
 
@@ -39,7 +38,7 @@ public class CaixaService {
         Pagamento pagamento = new Pagamento();
         pagamento.setValor(valor);
         pagamento.setDescricao(descricao);
-        pagamento.setDate(LocalDate.now());
+        pagamento.setDate(LocalDateTime.now());
         pagamento.setCaixa(caixa);
         caixa.setValorFinal(caixa.getValorFinal() + valor);
 

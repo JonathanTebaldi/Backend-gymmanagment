@@ -3,8 +3,7 @@ package br.edu.fema.tccacademia.models.caixa;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,8 +20,7 @@ public class Caixa {
     private Double saldoAtual;
     private Double valorInicial;
     private Double valorFinal;
-    @Temporal(TemporalType.DATE)
-    private LocalDate data;
+    private LocalDateTime data;
 
     @OneToMany
     private List<Pagamento> pagamento;
@@ -32,7 +30,7 @@ public class Caixa {
         this.saldoAtual = saldoAtual;
         this.valorInicial = valorInicial;
         this.valorFinal = valorFinal;
-        this.data = LocalDate.now();
+        this.data = LocalDateTime.now();
     }
 
 }

@@ -3,7 +3,7 @@ package br.edu.fema.tccacademia.models.caixa;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity(name = "Pagamento")
@@ -20,8 +20,7 @@ public class Pagamento {
     private UUID id;
     private Double valor;
     private String descricao;
-    @Temporal(TemporalType.DATE)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne
     private Caixa caixa;
@@ -29,7 +28,6 @@ public class Pagamento {
     public Pagamento(Double valor, String descricao){
         this.valor = valor;
         this.descricao = descricao;
-        this.date = LocalDate.now();
+        this.date = LocalDateTime.now();
     }
-
 }

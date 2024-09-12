@@ -1,10 +1,6 @@
 package br.edu.fema.tccacademia.controller;
 
-import br.edu.fema.tccacademia.models.aluno.DadosDetalhamentoAluno;
-import br.edu.fema.tccacademia.models.aluno.Aluno;
-import br.edu.fema.tccacademia.models.aluno.DadosAtualizacaoAluno;
-import br.edu.fema.tccacademia.models.aluno.DadosCadastroAluno;
-import br.edu.fema.tccacademia.models.aluno.DadosListagemAluno;
+import br.edu.fema.tccacademia.models.aluno.*;
 import br.edu.fema.tccacademia.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -16,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -25,6 +22,9 @@ public class AlunoController {
 
     @Autowired
     private AlunoRepository repository;
+
+    @Autowired
+    private AlunoService alunoService;
 
     @PostMapping
     @Transactional
@@ -79,5 +79,12 @@ public class AlunoController {
     public ResponseEntity detalhar(@PathVariable UUID id){
         var aluno = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoAluno(aluno));
+    }
+
+    @GetMapping("/buscar")
+    @Transactional
+    public ResponseEntity<List<Aluno>> buscarProdutoPorNome(@RequestParam String nome) {
+        List<Aluno> produtos = alunoService.buscarPorNome(nome);
+        return ResponseEntity.ok(produtos);
     }
 }
