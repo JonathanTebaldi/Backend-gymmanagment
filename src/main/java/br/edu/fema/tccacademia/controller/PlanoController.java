@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.DayOfWeek;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +26,7 @@ public class PlanoController {
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroPlano dados, UriComponentsBuilder uriBuilder){
         var plano = new Plano(dados);
+
         repository.save(plano);
 
         var uri = uriBuilder.path("planos/{id}").buildAndExpand(plano.getId()).toUri();

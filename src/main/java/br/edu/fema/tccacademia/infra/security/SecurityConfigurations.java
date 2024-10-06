@@ -39,8 +39,12 @@ public class SecurityConfigurations {
             "/auth/**"
     );
     public static List<String> AUTHENTICATED = Arrays.asList(
-            "/caixa",
-            "/aluno"
+            "/caixa/**",
+            "/aluno/**",
+            "/funcionario/**",
+            "/treino/**",
+            "/plano/**",
+            "/modalidade/**"
     );
 
     @Bean
@@ -55,8 +59,9 @@ public class SecurityConfigurations {
                 }))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(WHITELIST.toArray(String[]::new)).permitAll()
+
                         .requestMatchers(AUTHENTICATED.toArray(String[]::new)).authenticated()
-                        .anyRequest().denyAll()
+
                 )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(autenticacaoViaTokenFilter, UsernamePasswordAuthenticationFilter.class)

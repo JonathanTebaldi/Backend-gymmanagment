@@ -9,7 +9,7 @@ import java.util.List;
 public record DadosListagemModalidade(
         String nome,
         String descricao,
-        LocalDateTime diasDaSemana,
+        String diasDaSemana,
         List<Funcionario> funcionario
 ) {
 

@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 public record DadosCadastroAluno(
         @NotBlank
         String nome,
-        @NotBlank
+        @NotNull
         SexoEnum sexo,
         @NotBlank
         String celular,
-        @Pattern(regexp = "/^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$/")
+        @NotNull
         String cpf,
         LocalDateTime dataNascimento,
         String rg,
-        @NotNull
+
         Endereco endereco
 
 ) {

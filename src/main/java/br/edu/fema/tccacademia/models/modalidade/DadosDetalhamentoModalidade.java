@@ -9,7 +9,7 @@ public record DadosDetalhamentoModalidade(
         UUID id,
         String nome,
         String descricao,
-        LocalDateTime diasDaSemana,
+        String diasDaSemana,
         Funcionario funcionario
 ) {
     public DadosDetalhamentoModalidade(Modalidade modalidade) {

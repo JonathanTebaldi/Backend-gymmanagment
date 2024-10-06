@@ -2,6 +2,7 @@ package br.edu.fema.tccacademia.models.aluno;
 
 import br.edu.fema.tccacademia.enums.SexoEnum;
 import br.edu.fema.tccacademia.models.endereco.Endereco;
+import br.edu.fema.tccacademia.models.treino.Treino;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "Aluno")
@@ -30,6 +32,9 @@ public class Aluno{
     @Embedded
     private Endereco endereco;
     private Boolean ativo;
+    @OneToMany
+    List<Treino> treinos;
+
 
     public Aluno(DadosCadastroAluno dados) {
         this.id = UUID.randomUUID();

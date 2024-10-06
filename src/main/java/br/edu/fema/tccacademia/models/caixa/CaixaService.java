@@ -23,7 +23,15 @@ public class CaixaService {
         caixa.setValorInicial(valorInicial);
         caixa.setValorFinal(valorInicial);
         caixa.setData(LocalDateTime.now());
-        return caixaRepository.save(caixa);
+        caixaRepository.save(caixa);
+        return caixa;
+    }
+
+    public Caixa fecharCaixa(UUID id){
+        Caixa caixa = caixaRepository.findById(id).orElseThrow(() -> new RuntimeException("Caixa não encontrado"));
+        caixa.setDataEncerramento(LocalDateTime.now());
+        caixaRepository.save(caixa);
+        return caixa;
     }
 
     public void suprirCaixa(UUID id, Double valor){
@@ -51,10 +59,5 @@ public class CaixaService {
     public List<Pagamento> emitirHistoricoPagamento(UUID id){
         Caixa caixa = caixaRepository.findById(id).orElseThrow(() -> new RuntimeException("Caixa não encontrado"));
         return pagamentoRepository.findByCaixa(caixa);
-    }
-
-    public Caixa fecharCaixa(UUID id){
-        Caixa caixa = caixaRepository.findById(id).orElseThrow(() -> new RuntimeException("Caixa não encontrado"));
-        return caixa;
     }
 }

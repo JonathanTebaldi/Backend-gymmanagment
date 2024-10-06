@@ -13,8 +13,8 @@ public record DadosCadastroModalidade(
         @NotBlank
         String descricao,
         @NotNull
-        LocalDateTime diasDaSemana,
-        @NotNull
+        String diasDaSemana,
+
         List<Funcionario> funcionario
 ) {
 }

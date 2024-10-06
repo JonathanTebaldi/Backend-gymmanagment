@@ -13,7 +13,7 @@ public record DadosAtualizacaoModalidade(
         UUID id,
         String nome,
         String descricao,
-        LocalDateTime diasDaSemana,
+        String diasDaSemana,
         List<Funcionario> funcionario
 ) {
 }

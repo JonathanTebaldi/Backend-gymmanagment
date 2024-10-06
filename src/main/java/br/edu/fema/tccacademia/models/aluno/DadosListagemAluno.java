@@ -7,8 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record DadosListagemAluno(
+        UUID id,
         String nome,
         SexoEnum sexo,
         String celular,
@@ -19,7 +21,7 @@ public record DadosListagemAluno(
 ) {
 
 public DadosListagemAluno(Aluno aluno){
-    this(aluno.getNome(), aluno.getSexo(), aluno.getCelular(),aluno.getCpf(),
+    this(aluno.getId(), aluno.getNome(), aluno.getSexo(), aluno.getCelular(),aluno.getCpf(),
         aluno.getDataNascimento(), aluno.getRg(),aluno.getEndereco());
 }
 }

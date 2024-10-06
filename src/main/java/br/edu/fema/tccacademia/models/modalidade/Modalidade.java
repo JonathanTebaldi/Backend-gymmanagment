@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,16 +21,16 @@ public class Modalidade {
     private UUID id;
     private String nome;
     private String descricao;
-    private LocalDateTime diasDaSemana;
+    private String diasDaSemana;
     @ManyToMany
-    private List<Funcionario> funcionario;
+    private List<Funcionario> funcionario = new ArrayList<>();
 
     public Modalidade(DadosCadastroModalidade dados){
         this.id = UUID.randomUUID();
         this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.diasDaSemana = dados.diasDaSemana();
-        this.funcionario = dados.funcionario();
+        this.funcionario = new ArrayList<>(dados.funcionario());
     }
 
 

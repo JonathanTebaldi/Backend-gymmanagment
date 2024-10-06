@@ -16,11 +16,13 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Caixa {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private Double saldoAtual;
     private Double valorInicial;
     private Double valorFinal;
     private LocalDateTime data;
+    private LocalDateTime dataEncerramento;
 
     @OneToMany
     private List<Pagamento> pagamento;

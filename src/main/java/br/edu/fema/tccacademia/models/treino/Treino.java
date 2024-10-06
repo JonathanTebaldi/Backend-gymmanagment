@@ -1,11 +1,9 @@
 package br.edu.fema.tccacademia.models.treino;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "Treino")
@@ -13,6 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Treino {
     @Id
@@ -35,7 +34,7 @@ public class Treino {
             this.nomeExercicio = dados.nomeExercicio();
         }
         if(dados.descricao() != null){
-            this.descricao = dados.musculo();
+            this.descricao = dados.descricao();
         }
         if(dados.series() != null){
             this.series = dados.series();
@@ -44,5 +43,4 @@ public class Treino {
             this.musculo = dados.musculo();
         }
     }
-
 }

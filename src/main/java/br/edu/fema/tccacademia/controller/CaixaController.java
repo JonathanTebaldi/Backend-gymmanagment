@@ -12,16 +12,22 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("caixa")
+@RequestMapping("/caixa")
 public class CaixaController {
 
     @Autowired
     private CaixaService caixaService;
 
-    @PostMapping("/abrir")
-    private ResponseEntity<Caixa> abrirCaixa(@RequestParam Double valorInicial){
+    @PostMapping("/abrir/{valorInicial}")
+    private ResponseEntity<Caixa> abrirCaixa(@PathVariable("valorInicial") Double valorInicial){
+
         Caixa caixa = caixaService.abrirCaixa(valorInicial);
         return ResponseEntity.status(HttpStatus.CREATED).body(caixa);
+    }
+
+    @GetMapping("/teste")
+    public ResponseEntity<String> teste(){
+        return ResponseEntity.status(HttpStatus.OK).body("funfou");
     }
 
     @PostMapping("/suprir/{id}")

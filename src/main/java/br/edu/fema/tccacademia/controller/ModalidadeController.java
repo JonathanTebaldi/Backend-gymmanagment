@@ -31,6 +31,7 @@ public class ModalidadeController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroModalidade dados, UriComponentsBuilder uriBuilder){
+        System.out.println(dados);
         var modalidade = new Modalidade(dados);
         repository.save(modalidade);
 
